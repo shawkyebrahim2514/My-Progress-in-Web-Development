@@ -7,6 +7,7 @@ I made this template based on the template in
  
  ## Features
  This is a list of all features and tools i used in this project:
+ *  This template is responsive with all screens' width
  *  I used some HTML Semantics
  *  Users can change the main color of the page while browsing it
  *  There are some beautiful animations applied on each section and for all images
