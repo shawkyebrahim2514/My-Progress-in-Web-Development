@@ -1,0 +1,657 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap');
+/* Global */
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--lightColor-3);
+  background-color: var(--darkColor);
+}
+
+::selection {
+  background-color: var(--mainColor);
+  color: var(--lightColor-1);
+}
+
+:root {
+  --mainColor: #2db4c5;
+  --darkColor: #293132;
+  --lightColor-1: white;
+  --lightColor-2: #f8f8f8;
+  --lightColor-3: #E1F2FE;
+  --rightLeftPadding: 20px;
+  --topBottomPadding: 10px;
+  --transitionDuration: 0.3s;
+  --cardShadow: 1px 1px 5px #b4b4b4;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 var(--rightLeftPadding);
+}
+
+ul {
+  list-style: none;
+}
+
+/*navigation bar*/
+nav {
+  background-color: transparent;
+  color: var(--lightColor-3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+nav .container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+nav .container::after {
+  content: "";
+  position: absolute;
+  width: calc(100% - var(--rightLeftPadding) * 2);
+  bottom: 0;
+  left: var(--rightLeftPadding);
+  background-color: var(--lightColor-3);
+  height: 2px;
+}
+
+nav .container .links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav .container .links ul {
+  list-style: none;
+  display: flex;
+  transition: var(--transitionDuration);
+  transform-origin: center top;
+}
+
+nav .container .links :where(ul li a, .bars), .logo, .search {
+  padding: calc(var(--topBottomPadding) * 2) var(--rightLeftPadding);
+  position: relative;
+}
+
+nav .container .links .bars {
+  display: none;
+}
+
+nav .container .links ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--lightColor-3);
+  transition: var(--transitionDuration);
+  position: relative;
+}
+
+nav .container .links ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--mainColor);
+  transition: var(--transitionDuration);
+  height: 2px;
+  z-index: 1;
+}
+
+nav .container .links ul li a:hover {
+  color: var(--mainColor);
+}
+
+nav .container .links ul li a:hover::after {
+  width: calc(100% - var(--rightLeftPadding) * 2);
+  left: var(--rightLeftPadding);
+}
+
+.search:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 50%;
+  top: 25%;
+  left: 0;
+  background-color: var(--lightColor-3);
+}
+
+@media (max-width: 773px) {
+  nav .container .links .bars {
+    display: block;
+  }
+
+  nav .container .links ul {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    top: 100%;
+    padding: 0 calc(var(--rightLeftPadding)*2);
+    transform: rotateX(90deg);
+  }
+
+  nav .container .links .bars:hover ~ ul {
+    transform: rotateX(0);
+  }
+
+  nav .container .links ul :where(li, li a) {
+    width: 100%;
+  }
+
+  nav .container .links ul li a:hover {
+    padding-left: calc(var(--rightLeftPadding) * 3);
+  }
+
+  nav .container .links ul li a::after {
+    left: var(--rightLeftPadding) !important;
+  }
+
+  nav:has(.container .links .bars:hover) + header::after {
+    opacity: 0.9;
+    z-index: 2;
+  }
+
+}
+
+/*Common*/
+
+body > header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+/*header style*/
+body > header {
+  height: 100vh;
+  background-image: url("../images/background-2.jpg");
+  background-size: cover;
+  position: relative;
+}
+
+body > header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--darkColor);
+  opacity: 0.7;
+}
+
+body > header section {
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--mainColor);
+  padding: calc(var(--topBottomPadding) * 4) calc(var(--rightLeftPadding) * 4);
+  z-index: 1;
+}
+
+@media (max-width: 773px) {
+  body > header section {
+    width: 90%;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  body > header section > div {
+    width: 100%;
+  }
+}
+
+body > header section > div {
+  width: 85%;
+}
+
+body > header section > div h2 {
+  margin-bottom: 25px;
+}
+
+body > header section .transition {
+  position: absolute;
+  top: calc(100% - (3 * 15px));
+  left: calc(50% - (3 * 15px) / 2);
+  width: auto;
+}
+
+body > header section .transition span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid var(--lightColor-3);
+  margin-right: 5px;
+}
+
+body > header section .transition span:nth-child(2) {
+  background-color: var(--mainColor);
+}
+
+/*Common*/
+body > section, body > footer {
+  padding: calc(var(--topBottomPadding) * 5) 0;
+}
+
+body > section .container > header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+body > section .container header h2 {
+  margin-bottom: 25px;
+  display: inline-block;
+  padding-bottom: 15px;
+  font-size: 2.2em;
+  font-weight: 800;
+  border-bottom: 3px solid var(--darkColor);
+  position: relative;
+}
+
+body > section .container header h2:after {
+  content: "";
+  --circleSize: 10px;
+  --borderSize: 3px;
+  width: var(--circleSize);
+  height: var(--circleSize);
+  background-color: var(--lightColor-3);
+  border: var(--borderSize) solid var(--darkColor);
+  border-radius: 50%;
+  position: absolute;
+  top: calc(100% - (var(--circleSize) + var(--borderSize)) / 2);
+  left: calc(50% - (var(--circleSize) + var(--borderSize)) / 2);
+}
+
+body > section .container header p {
+  padding: 0 20%;
+}
+
+/*Common*/
+section.services, section.portfolios, section.about, section.prices {
+  background-color: var(--lightColor-3);
+  color: var(--darkColor);
+}
+
+/*Services Style*/
+
+section.services .container > div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 70px;
+}
+
+section.services .container > div > section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  background-color: var(--lightColor-1);
+  box-shadow: var(--cardShadow);
+  padding: calc(var(--topBottomPadding) * 2) calc(var(--rightLeftPadding) * 2);
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+section.services .container > div > section i {
+  font-size: 3em;
+  color: var(--mainColor);
+}
+
+section.services .container > div > section article h3 {
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+section.services + section .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+section.services + section .container section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.services + section .container section h2 {
+  font-size: 2em;
+  font-weight: 800;
+  margin-bottom: 50px;
+}
+
+section.services + section .container section ul li {
+  padding: var(--topBottomPadding) calc(var(--rightLeftPadding) * 2);
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  position: relative;
+}
+
+section.services + section .container section ul li i {
+  margin-right: 20px;
+}
+
+@media (max-width: 893px) {
+  section.services .container > div {
+    grid-template-columns: 1fr;
+  }
+
+  section.services .container > div > section {
+    grid-template-columns: 1fr 5fr;
+  }
+
+  section.services + section .container {
+    grid-template-columns: 1fr;
+  }
+
+  section.services + section .container figure {
+    display: none;
+  }
+
+  section.services + section .container section h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 563px) {
+  section.services .container > div > section {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  section.services .container > div > section i {
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/*Portfolios style*/
+section.portfolios .container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+section.portfolios .container > div ul li {
+  display: inline-block;
+  padding: var(--topBottomPadding) var(--rightLeftPadding);
+  transition: background-color var(--transitionDuration);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+section.portfolios .container > div ul li:hover {
+  background-color: var(--mainColor);
+  color: var(--lightColor-3);
+}
+
+/*Gallery style*/
+section.gallery .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+section.gallery .container figure {
+  background-color: var(--lightColor-3);
+  color: var(--darkColor);
+  position: relative;
+  padding-bottom: 10px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+section.gallery .container figure:hover .image-container:after {
+  opacity: 0;
+}
+
+section.gallery .container figure:hover .image-container img {
+  transform: rotate(-3deg) scale(1.1);
+}
+
+
+section.gallery .container figure .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+section.gallery .container figure .image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transitionDuration);
+}
+
+section.gallery .container figure .image-container:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--darkColor);
+  opacity: 0.4;
+  transition: var(--transitionDuration);
+}
+
+section.gallery .container figure > *:not(.image-container) {
+  padding: var(--topBottomPadding) var(--rightLeftPadding);
+}
+
+section.gallery .container figure figcaption {
+  background-color: var(--mainColor);
+  color: var(--lightColor-3);
+  font-weight: 600;
+  text-align: center;
+}
+
+section.gallery .container figure ul li {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: var(--mainColor);
+  color: var(--lightColor-3);
+}
+
+/*About Style*/
+
+section.about .container > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+section.about .container > div article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.about .container > div article h2 {
+  font-size: 1.5em;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+section.about .container > div article p {
+  font-size: 1.2em;
+}
+
+section.about + section .container > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+}
+
+section.about + section .container > div section {
+  background-color: var(--lightColor-3);
+  height: 35px;
+  position: relative;
+  margin-top: 35px;
+}
+
+section.about + section .container > div section h4 {
+  position: absolute;
+  top: -30px;
+}
+
+section.about + section .container > div section span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--mainColor);
+  height: 100%;
+}
+
+section.about + section .container > div section span::after {
+  content: attr(data-width);
+  position: absolute;
+  top: -40px;
+  right: -30px;
+  background-color: var(--lightColor-3);
+  height: 30px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--darkColor);
+}
+
+section.about + section .container header h2 {
+  border-bottom-color: var(--lightColor-3);
+}
+
+section.about + section .container header h2:after {
+  border-color: var(--lightColor-3);
+  background-color: var(--darkColor);
+}
+
+@media (max-width: 767px) {
+  section.about + section .container > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 563px) {
+  section.about .container > div {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  section.about .container > div figure {
+    display: none;
+  }
+
+}
+
+/*Prices style*/
+section.prices .container > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+section.prices .container > div section {
+  border: 3px solid var(--darkColor);
+  padding: var(--topBottomPadding) var(--rightLeftPadding);
+  text-align: center;
+  font-size: 1.2em;
+  background-color: var(--lightColor-1);
+}
+
+section.prices .container > div section header {
+  border-bottom: 3px solid var(--darkColor);
+  padding: calc(var(--topBottomPadding) * 2) 0;
+}
+
+section.prices .container > div section header div.price {
+  font-size: 2.4em;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+section.prices .container > div section header div.price span {
+  position: relative;
+}
+
+section.prices .container > div section header div.price span::before {
+  content: "$";
+  position: absolute;
+  top: 0;
+  left: -30px;
+  font-size: 0.5em;
+}
+
+section.prices .container > div section header div.price span::after {
+  content: "\\month";
+  position: absolute;
+  bottom: 0;
+  right: -90px;
+  font-size: 0.4em;
+}
+
+section.prices .container > div section .details {
+  border-bottom: 3px solid var(--darkColor);
+  display: flex;
+  flex-direction: column;
+}
+
+section.prices .container > div section :where(.details span, footer) {
+  padding: calc(var(--topBottomPadding) * 2) 0;
+}
+
+section.prices .container > div section footer a {
+  padding: calc(var(--topBottomPadding)*1.5) calc(var(--rightLeftPadding)*1.5);
+  text-decoration: none;
+  background-color: var(--darkColor);
+  color: var(--lightColor-1);
+  display: inline-block;
+}
+
+/*Footer style*/
+body > footer {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+body > footer .designer {
+  margin-bottom: 10px;
+}
+
+body > footer .designer i {
+  color: tomato;
+}
+
+body > footer .links a {
+  color: var(--lightColor-3);
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
